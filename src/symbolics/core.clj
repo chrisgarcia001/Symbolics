@@ -84,7 +84,7 @@
 (defn get-top-exp [deriv] (get-exp (first deriv)))
 
 ;--------------------------------------------------------------------------------------
-; FUNCTIONS NEEDED:
+; CORE LOGIC FUNCTIONS:
 
 ; match (pattern exp {:var -> val}): {:var -> val} | false
 ; match-rule (Rule exp): {:var -> val} | false
