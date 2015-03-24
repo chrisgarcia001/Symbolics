@@ -62,4 +62,19 @@
              (is (= (first (last (rewrite-prove rs4 start-exp end-exp 15))) 
                     end-exp)))))
 
+;------------------ Test 5 -------------------------------------
+; Test failure using RS2
+(deftest test-5
+  (testing "Basic failure test"
+           (let [start-exp '((2 * x) + (x * 3))
+                 end-exp '(x * (3 + 3))]
+             (is (not (rewrite-prove rs2 start-exp end-exp 15)))))) 
+
+;------------------ Test 6 -------------------------------------
+; Test failure for provable but with too small max-depth, using RS4
+(deftest test-6
+  (testing "Test failure due to too small max-depth"
+           (let [start-exp '(x * (3 + 2))
+                 end-exp '((2 * x) + (x * 3))]
+             (is (not (rewrite-prove rs4 start-exp end-exp 2)))))) 
 

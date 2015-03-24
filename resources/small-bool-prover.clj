@@ -17,8 +17,8 @@
     '((:a * (:b + :c)) ((:a * :b) + (:a * :c)) "Distributive")
     '((:a + (:b * :c)) ((:a + :b) * (:a + :c)) "Distributive")))
                     
-(def small-bool-prove 
-  (fn [lhs rhs] (pprint ((build-prover-fn small-axioms 9) lhs rhs))))
+(defn small-bool-prove [lhs rhs] 
+  (pprint ((build-prover-fn small-axioms 9) lhs rhs)))
 
 ;-------- SAMPLE REPL USAGE---------------------------
 ;> (load-file "resources/small-bool-prover.clj")

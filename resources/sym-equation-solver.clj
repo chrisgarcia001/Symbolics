@@ -22,10 +22,9 @@
     '((= :x (* :y :z)) (= (/ :x :y) :z) "Divide")
     '((= (power :x 2) :y) (= :x (sqrt :y)) "Power")))
 
-(def eq-solve
-  (fn [equation target] 
+(defn eq-solve [equation target] 
     (let [target-f #(= (second %1) target)]
-      (pprint ((build-reducer-fn equational-eqvs target-f 9) equation)))))
+      (pprint ((build-reducer-fn equational-eqvs target-f 9) equation))))
 
 ;-------- SAMPLE REPL USAGE---------------------------
 ;> (load-file "resources/sym-equation-solver.clj")

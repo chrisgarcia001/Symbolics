@@ -28,8 +28,8 @@
     '((! (:a + :b)) ((! :a) * (! :b)) "Demorgan")
     '((! (:a * :b)) ((! :a) + (! :b)) "Demorgan")))
                     
-(def bool-prove 
-  (fn [lhs rhs] (pprint ((build-prover-fn base-axioms 7) lhs rhs))))
+(defn bool-prove [lhs rhs] 
+  (pprint ((build-prover-fn base-axioms 7) lhs rhs)))
 
 ;-------- SAMPLE REPL USAGE---------------------------
 ;> (load-file "resources/bool-algebra-prover.clj")
