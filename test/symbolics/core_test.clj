@@ -53,8 +53,7 @@
 (def rs4 (bidirectional-ruleset 
            '((:a + :b) (:b + :a) "Commutative-Add")
            '((:a * :b) (:b * :a) "Commutative-Mult")
-           '(((:a * :c) + (:b * :c)) ((:a + :b) * :c) "simp")
-           '(((:a + :b) * :c) ((:a * :c) + (:b * :c)) "simp")))
+           '(((:a * :c) + (:b * :c)) ((:a + :b) * :c) "simp")))
 
 (deftest test-4
   (testing "Bidirectional rewrite rules"
