@@ -5,7 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]]
   :source-paths ["src" "src/symbolics" "resources"]
-  ;:main ^:skip-aot symbolics.core
   :jvm-opts ["-Xmx5g"]
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

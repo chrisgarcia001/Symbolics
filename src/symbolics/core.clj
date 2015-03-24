@@ -279,6 +279,9 @@
    pattern 2."
   (map #(apply make-rule %1) rule-forms))
 
+; This is an alias for the function above.
+(def unidirectional-ruleset symbolic-ruleset)
+
 (defn bidirectional-symbolic-ruleset [& rule-forms]
   "Constructs a bi-directional set of rewrite rules (purely symbolic). Each
    rule input is a list of (<pattern 1> <pattern 2> <rule name>). In the resulting
@@ -287,6 +290,9 @@
   (let [flip #(concat (list (second %1) (first %1)) (rest (rest %1)))
         opps (map flip rule-forms)]
     (apply symbolic-ruleset (concat rule-forms opps))))
+
+; This is an alias for the function above.
+(def bidirectional-ruleset bidirectional-symbolic-ruleset)
 
 ; This is an alias for the function above.                      
 (def identity-ruleset bidirectional-symbolic-ruleset)
@@ -309,5 +315,6 @@
                             (second form)))]
     (apply evaluative-ruleset (map rb op-forms))))
 
-
+; This is an alias for the function above. 
+(def operators operator-ruleset)
 
