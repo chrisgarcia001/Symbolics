@@ -78,3 +78,11 @@
                  end-exp '((2 * x) + (x * 3))]
              (is (not (rewrite-prove rs4 start-exp end-exp 2)))))) 
 
+;------------------ Test 7 -------------------------------------
+; Test failure for non-matching outer exps., using RS4
+(deftest test-7
+  (testing "Test failure due to too small max-depth"
+           (let [start-exp '((x + y) + (y + z) + (z + a))
+                 end-exp '((y + x) + (z + y) + (a + z))]
+             (is (not (rewrite-prove rs4 start-exp end-exp 2)))))) 
+
