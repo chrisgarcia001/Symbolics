@@ -1,3 +1,5 @@
+; This is another boolean algebra theorem prover which uses a more
+; minimalist set of axioms.
 
 (use 'symbolics.core)
 (use '[clojure.pprint :only [pprint]])
