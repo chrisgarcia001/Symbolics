@@ -18,7 +18,7 @@ condition function.
 We begin with a quick explanation of the key concepts needed to use
 this libaray.
 
-*1) Rules* A rule is simply a list of three elements: a left-hand expression, 
+**1) Rules** A rule is simply a list of three elements: a left-hand expression, 
 a right-hand expression, and a rule name. An expression is enclosed in parentheses
 and can contain any mix of variables or constants. Variables are represented by
 keywords (e.g. :x, :y, :x) and constants are ordinary symbols. Here is two example rules:
@@ -30,7 +30,11 @@ keywords (e.g. :x, :y, :x) and constants are ordinary symbols. Here is two examp
 
 
 
-*2) Rulesets*
-*3) Ruleset Builders*
-*4) Terminal Conditon Functions*
-*5) Prover and Reducer Functions and Builders*
+**2) Rulesets**
+
+**3) Ruleset Builders**
+
+**4) Terminal Conditon Functions**
+
+**5) Prover and Reducer Functions and Builders**
+
