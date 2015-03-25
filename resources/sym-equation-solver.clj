@@ -5,7 +5,7 @@
 (use '[clojure.pprint :only [pprint]])
 
 ; We use three basic rule sets combined into one overall ruleset:
-; 1) equaltional equivalences,  2) term equivalences, and 3) simplifying rules.
+; 1) equational equivalences, 2) term equivalences, and 3) simplifying rules.
 
 (def equational-eqvs
   (bidirectional-ruleset 
@@ -46,6 +46,6 @@
 ;> (load-file "resources/sym-equation-solver.clj")
 ;> (eq-solve '(X = (Y / Z)) 'Y)
 ;> (eq-solve '(A = ((W + X) / (Y + Z))) 'Z)
-;> (eq-solve '(E = ((Z * S) / (sqrt n))) 'n)
+;> (eq-solve '(E = ((Z * S) / (sqrt N))) 'N)
 
     

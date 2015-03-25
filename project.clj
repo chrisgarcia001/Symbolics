@@ -1,5 +1,5 @@
 (defproject symbolics "0.1.0-SNAPSHOT"
-  :description "A library for automated theorem proving and symbolic manipulation"
+  :description "A library for automated theorem proving and symbolic manipulation, based on algebraic term rewriting"
   :url "https://github.com/chrisgarcia001/Symbolics"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
