@@ -185,7 +185,7 @@ this libaray.
 **1) Rules and Pattern Matching:** A rule is simply a list of three elements: a left-hand expression, 
 a right-hand expression, and a rule name. An expression is enclosed in parentheses
 and can contain any mix of variables or constants. Variables are represented by
-keywords (e.g. :x, :y, :x) and constants are anything else. Here is two example rules:
+keywords (e.g. *:x*, *:y*, and *:x*) and constants are anything else. Here is two example rules:
 
 ```clojure
 '((:a + (:b * 1)) (:a + :b) "Simplify")
