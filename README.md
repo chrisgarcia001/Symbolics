@@ -60,7 +60,7 @@ as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj
 ```
 
 This code can be loaded into the REPL and can prove boolean algebra identity theorems
-interactively. Using the *build-prover-fn* function we constructed another function 
+specified by the user. Using the *build-prover-fn* function we constructed another function 
 *bool-prove* (which we then wrapped in pretty printing) which can produce proofs of 
 up to 7 steps. The ruleset is bi-directional, meaning that right-hand sides 
 (if encountered) can also be rewritten into left-hand sides. Here is a sample 
