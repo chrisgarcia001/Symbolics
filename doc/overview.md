@@ -1,9 +1,10 @@
 Overview of Symbolics
 ===============
 
-It is fairly easy to create systems using symbolics by looking at examples. However, 
-in this document we explain the core ideas and illustrate the fuller range of capabilities 
-for this library. A a few tips for usage are also given toward the end.
+It is fairly easy to create systems using symbolics by looking at examples. If you haven't already,
+read through the main page to get an idea how this library works ![here](../README.md). In this 
+document we explain the core ideas and illustrate the fuller range of capabilities for this library. 
+A a few tips for usage are also given toward the end. 
 
 #### Key Components in More Depth
 

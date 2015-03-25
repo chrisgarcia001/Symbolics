@@ -179,6 +179,5 @@ have gotten shorter sequences of steps.
 
 #### Documentation
 
-It is fairly easy to construct symbolic manipulation systems with library by looking at
-the examples above. However, a more systematic overview and a description of the full
+A more systematic overview and a description of the full
 range of capabilities can be found in the documentation ![here](/doc/overview.md).
