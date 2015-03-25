@@ -6,6 +6,7 @@
 
 ; These are the basic axioms of boolean algebra, taken from here:
 ; http://www-acad.sheridanc.on.ca/~jollymor/info16029/lawsRef.html
+
 (def base-axioms 
   (bidirectional-ruleset 
     '((:a + 0) :a "Identity")
