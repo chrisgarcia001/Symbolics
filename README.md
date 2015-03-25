@@ -252,7 +252,7 @@ If infix is desired then rewrite rules which go from infix to prefix can simply 
 Here is a small sample which uses rewrite rules together with operators (source ![here](/resources/operators-example.clj)):
 
 ```clojure
- This illustrates a small system which uses operators and user-defined
+; This illustrates a small system which uses operators and user-defined
 ; functions with symbolic rewriting.
 
 (use 'symbolics.core)
