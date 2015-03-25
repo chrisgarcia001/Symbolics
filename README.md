@@ -309,7 +309,7 @@ nil
 user=>
 ```
 
-**5) Prover and Reducer Functions and Builders:** There are two main ways this
+**4) Prover and Reducer Functions and Builders:** There are two main ways this
 library can be used: 1) either for automated theorem proving, or 2) as a general
 term rewriting system. Algebraic theorem proving involves transforming one 
 expression into another, while term rewriting involves successively transforming
@@ -321,6 +321,5 @@ functions used to build prover or rewriting systems:
 The function *build-prover-fn* will **PICK UP LATER** 
 
 
-**6) Incorporating Functions and Operations:**
 
 #### Tips for Usage
