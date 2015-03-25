@@ -314,12 +314,50 @@ library can be used: 1) either for automated theorem proving, or 2) as a general
 term rewriting system. Algebraic theorem proving involves transforming one 
 expression into another, while term rewriting involves successively transforming
 an expression until it meets some termination criteria. Accordingly, there are two
-functions used to build prover or rewriting systems:
+functions used to build prover or rewriting systems
 
-*(build-prover-fn <ruleset> <max steps in proof>)*
+A theorem prover can be built with the following function:
 
-The function *build-prover-fn* will **PICK UP LATER** 
+*(build-prover-fn [ruleset] [max steps in proof])*
 
+The function *build-prover-fn* will construct a new function which takes a 
+left and right expressions, and builds a proof that transforms the left into the 
+right. Here is a sample usage:
 
+```clojure
+(let [prove (build-prover-fn ruleset 10)
+      proof (prove lhs rhs)]
+   proof)  ; will return a proof transforming lhs into rhs of at most 10 steps
+```
+
+In some cases we want to terminate not when LHS is turned into RHS, but rather 
+when the current expression meets a more general termination criteria. A general 
+rewriting system of this form can be constructed with the following function:
+
+*(build-reducer-fn [ruleset] [termination criteria function] [max steps])*
+
+```clojure
+; In this example the termination criteria is if the expression has 1 element.
+(let [termination-criteria (fn [exp] (= (count exp) 1)) 
+      reducer-fn (build-reducer-fn ruleset termination-criteria 10)
+      steps (reducer-fn starting-expression)]
+  steps) ; Return the results - a set of steps to reach stopping criteria
+```
 
 #### Tips for Usage
+
+The general philosophy for this library is ease of use and generality. Some 
+performance is sacrificed for generality, and this does not incorporate optimizations
+based on characteristics specific to certain axiom or rule systems. 
+
+The underlying algorithm uses dynamic programming to avoid resolving 
+sub-problems. It uses memory to speed up the processing, and it consumes a lot of memory.
+It is recommended to up your JVM memory allocation when using this library. If you are using
+Leiningen, you can add do this easily by adding the following (or similar) to your project.clj:
+
+```clojure
+:jvm-opts ["-Xmx5g"] ; allocate 5 GB to JVM
+```
+
+As a final note, theorem proving is in general very computationally intensive. It
+may take 15-30 seconds (or more) in some cases for proofs to be constructed.
