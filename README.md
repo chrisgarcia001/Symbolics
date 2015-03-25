@@ -123,7 +123,6 @@ easily to include more rules, but this suffices for demonstration:
 
 (def simplifiers
   (unidirectional-ruleset 
-    '(((:x / :y) * :y) :x "Mult by denom.")
     '((:x * 1) :x "Simplification")
     '((:x * 0) 0 "Simplification")
     '((:x + 0) :x "Simplification")
@@ -228,3 +227,6 @@ the term rewriter will actually produce the following rewrites for Expression 3:
 
 **5) Prover and Reducer Functions and Builders:**
 
+**6) Incorporating Functions and Operations:**
+
+#### Tips for Usage

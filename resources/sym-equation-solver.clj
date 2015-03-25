@@ -22,7 +22,6 @@
 
 (def simplifiers
   (unidirectional-ruleset 
-    '(((:x / :y) * :y) :x "Mult by denom.")
     '((:x * 1) :x "Simplification")
     '((:x * 0) 0 "Simplification")
     '((:x + 0) :x "Simplification")
