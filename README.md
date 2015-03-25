@@ -60,10 +60,10 @@ as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj
 ```
 
 This code can be loaded into the REPL and can prove boolean algebra identity theorems
-interactively. We constructed a function which can produce proofs of up to 7 steps,
-and wrapped it in pretty printing. The ruleset is bi-directional, meaning that right-hand
-sides (if encountered) can also be rewritten into left-hand sides. Here is a sample usage
-inside the REPL to prove two theorems:
+interactively. Using the *build-prover-fn* function we constructed a function which can 
+produce proofs of up to 7 steps, and wrapped it in pretty printing. The ruleset is 
+bi-directional, meaning that right-hand sides (if encountered) can also be rewritten 
+into left-hand sides. Here is a sample usage inside the REPL to prove two theorems:
 
 ```clojure
 user=> (load-file "resources/bool-algebra-prover.clj")
@@ -175,7 +175,7 @@ user=>
 We provide a quick explanation of the key concepts needed to use
 this libaray.
 
-**1) Rules:** A rule is simply a list of three elements: a left-hand expression, 
+**1) Rules and Pattern Matching:** A rule is simply a list of three elements: a left-hand expression, 
 a right-hand expression, and a rule name. An expression is enclosed in parentheses
 and can contain any mix of variables or constants. Variables are represented by
 keywords (e.g. :x, :y, :x) and constants are anything else. Here is two example rules:
@@ -188,20 +188,18 @@ In the rules above the variables are :a, :b, and :c and the constants are + and 
 To illustrate how the matching and rewriting happens, consider the following expressions:
 
 ```clojure
-;-------------------- Expression 1 --------------------------
-'(x + ((y + z) * 1) 
+'(x + ((y + z) * 1) ; Expression 1
 ; Matches the simplify rule, where :a = x and :b = (y + z). 
 ;Here is how it would be rewritten:
 '(x + (y + z))
 
-;-------------------- Expression 2 --------------------------
-'(x + y) 
+'(x + y) ; Expression 2
 ; Matches the commutative rule, where :a = x and :b = y. 
 ; Here is how it would be rewritten:
 '(y + x)
 
-;-------------------- Expression 3 --------------------------
-'((w + x) + (y + z)) 
+
+'((w + x) + (y + z)) Expression 3 
 ; Matches the commutative rule, where :a = (w + x) and :b = (y + z). 
 ;Here is how it would be (directly) rewritten:
 '((y + z) + (w + x)
@@ -213,13 +211,14 @@ the term rewriter will actually produce the following rewrites for Expression 3:
 
 ```clojure
 '((w + x) + (y + z)) ; Expression 3
-; Produces the following through 1-step transforms:
+; Any of the following can be produced in 1 step:
 '((y + z) + (w + x)
 '((x + w) + (y + z))
 '((w + x) + (z + y))
 ````
 
-**2) Rulesets:**
+**2) Rulesets:** A ruleset is simply a list of rules. Accordingly, two or more sets of rules can be merged 
+into a single set with *concat*.
 
 **3) Ruleset Builders:**
 
