@@ -94,7 +94,7 @@ Additionaly, each proof begin with the LHS and ends with the RHS.
 
 Computer algebra systems (CAS) can solve equations by manipulating them algebraically, 
 allowing symbolic solution as opposed to merely numeric. In this example we show 
-a rudimentary CAS-style equation solver (full source code ![HERE](/resources/sym-equation-solver.clj)).
+a rudimentary CAS-style equation solver (full source code ![here](/resources/sym-equation-solver.clj)).
 This allows you to specify an equation and a variable or expression to solve for,
 and the solver will find the solution algebraically. It can be extended fairly
 easily to include more rules, but this suffices for demonstration:
