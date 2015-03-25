@@ -246,7 +246,13 @@ rewrite rules. Here is an example:
 (def ops (operator-ruleset '(+ "Add.") '(* "Mult."))) ; Evaluate + and * where possible
 ```
 
-As a general note, any 
+Any function or operator must be evaluated in standard Clojure prefix (e.g. *(+ 2 3)*), not infix (e.g. *(2 + 3)*). If
+infix is desired then rewrite rules which go from infix to prefix can simply be incorporated.
+
+Here is a small sample which uses rewrite rules together with operators:
+
+```clojure
+```
 
 **4) Terminal Conditon Functions:**
 
