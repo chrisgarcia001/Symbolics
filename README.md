@@ -13,6 +13,49 @@ condition, specified by a user-defined function. A symbolic manipulation system
 or theorem prover simply entails writing a set of rules, together with a termination
 condition function.
 
+We will begin with a few small but semi-realistic examples to illustrate how to use
+this library, and then explain the the anatomy in more depth. All examples are
+found in the ![resources](/resources) directory.
+
+### Example 1: A Boolean Algebra Theorem Prover
+
+Boolean algebra is often studied in discrete math, abstract algebra,  and electronics. 
+In this example, we use a typical set of axioms found in most discrete math texts
+as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj)) is as follows:
+
+```clojure
+use 'symbolics.core)
+(use '[clojure.pprint :only [pprint]])
+
+; These are the basic axioms of boolean algebra, taken from here:
+; http://www-acad.sheridanc.on.ca/~jollymor/info16029/lawsRef.html
+
+(def base-axioms 
+  (bidirectional-ruleset 
+    '((:a + 0) :a "Identity")
+    '((:a * 1) :a "Identity")
+    '((:a + 1) 1 "Identity")
+    '((:a * 0) 0 "Identity")
+    '((:a + (! :a)) 1 "Complement")
+    '((:a * (! :a)) 0 "Complement")
+    '((! (! :a)) :a "Double Negation")
+    '((:a + :a) :a "Idempotent")
+    '((:a * :a) :a "Idempotent")
+    '((:a + :b) (:b + :a) "Commutative")
+    '((:a * :b) (:b * :a) "Commutative")
+    '(((:a + :b) + :c) (:a + (:b + :c)) "Associative")
+    '(((:a * :b) * :c) (:a * (:b * :c)) "Associative")
+    '((:a * (:b + :c)) ((:a * :b) + (:a * :c)) "Distributive")
+    '((:a + (:b * :c)) ((:a + :b) * (:a + :c)) "Distributive")
+    '((:a + (:a * :b)) :a "Absorption")
+    '((:a * (:a + :b)) :a "Absorption")
+    '((! (:a + :b)) ((! :a) * (! :b)) "Demorgan")
+    '((! (:a * :b)) ((! :a) + (! :b)) "Demorgan")))
+                    
+(defn bool-prove [lhs rhs] 
+  (pprint ((build-prover-fn base-axioms 7) lhs rhs)))
+```
+
 ### Preliminaries and Key Components
 
 We begin with a quick explanation of the key concepts needed to use
@@ -37,13 +80,13 @@ To illustrate how the matching and rewriting happens, consider the following exp
 ;Here is how it would be rewritten:
 '(x + (y + z))
 
-;-------------------- Expression 1 --------------------------
+;-------------------- Expression 2 --------------------------
 '(x + y) 
 ; Matches the commutative rule, where :a = x and :b = y. 
 ; Here is how it would be rewritten:
 '(y + x)
 
-;-------------------- Expression 1 --------------------------
+;-------------------- Expression 3 --------------------------
 '((w + x) + (y + z)) 
 ; Matches the commutative rule, where :a = (w + x) and :b = (y + z). 
 ;Here is how it would be (directly) rewritten:
