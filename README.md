@@ -24,6 +24,9 @@ In this example, we use a typical set of axioms found in most discrete math text
 as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj)) is as follows:
 
 ```clojure
+; This is boolean algebra theorem prover which uses a fairly
+; standard set of axioms found in most discrete math books.
+
 (use 'symbolics.core)
 (use '[clojure.pprint :only [pprint]])
 
@@ -92,9 +95,13 @@ Computer algebra systems (CAS) can solve equations by manipulating them algebrai
 allowing symbolic solution as opposed to merely numeric. In this example we show 
 a rudimentary CAS-style equation solver (full source code ![HERE](/resources/sym-equation-solver.clj)).
 This allows you to specify an equation and a variable or expression to solve for,
-and the solver will find the solution algebraically. Here is the code:
+and the solver will find the solution algebraically. It can be extended fairly
+easily to include more rules, but this suffices for demonstration:
 
 ```clojure
+; This performs symbolic equation solving using algebraic rules,
+; similar to the way a human would solve.
+
 (use 'symbolics.core)
 (use '[clojure.pprint :only [pprint]])
 
