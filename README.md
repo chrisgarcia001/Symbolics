@@ -7,7 +7,7 @@ Symbolics is a library to simplify the development of automated theorem provers
 and symbolic manipulation systems. It is based on algebraic term rewriting, which
 entails the step-by-step transformation of one expression into another through a
 set of 2-sided rewriting rules. Each rule has a left and right hand side. When
-the expression matches the left side of a rule, it is replaced by the right. The
+an expression matches the left side of a rule, it is replaced by the right. The
 process of rewriting continues until the current expression reaches a terminal 
 condition, specified by a user-defined function. A symbolic manipulation system
 or theorem prover simply entails writing a set of rules, together with a termination
@@ -19,7 +19,7 @@ found in the ![resources](/resources) directory.
 
 #### Example 1: A Boolean Algebra Theorem Prover
 
-Boolean algebra is often studied in discrete math, abstract algebra,  and electronics. 
+Boolean algebra is often studied in discrete math, abstract algebra, and electrical engineering. 
 In this example, we use a typical set of axioms found in most discrete math texts
 as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj)) is as follows:
 
