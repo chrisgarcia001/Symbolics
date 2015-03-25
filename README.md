@@ -171,9 +171,9 @@ nil
 user=>
 ```
 
-In the steps above it may appear that some steps are unnecessary (e.g. equation
+In the solutions above it may appear that some steps are unnecessary (e.g. equation
 flipping). However, this is because we had rules only to deal with one equational
-layout. So to find matches the equations needed to be flipped first, and we 
+layout. So to find matches, the equations needed to be flipped first, and we 
 did this to keep the rulesets short. By adding rules for mirroring layots we would 
 have gotten shorter sequences of steps.
 
@@ -234,9 +234,19 @@ expression. Usage of the *unidirectional-ruleset* and *bidirectional-ruleset* fu
 above. 
 
 Sometimes we want to have a function or operator (which can compute something) to also be incorporated as something
-to be manipulated symbolically, and applied where it can be applied. For example, we would not want *(2 + 3)* to appear
-in a (partially) symbolic expression, we would rather it be *5*. However, we would want *(a + 3)*, since *a* is a symbol
+to be manipulated symbolically, and applied where it can be applied. For example, we would **not** want *(2 + 3)* to appear
+in a (partially) symbolic expression, we would rather it be *5*. However, we **would** want *(a + 3)*, since *a* is a symbol
 and the expression *(a + 3)* cannot be evaluated. 
+
+Any operator or user-defined function can be incorporated like this. To do so, just use the *operator-ruleset' function 
+to build a ruleset specifying which symbols should be evaluated as a function where posible, and then merge with a set of
+rewrite rules. Here is an example:
+
+```clojure
+(def ops (operator-ruleset '(+ "Add.") '(* "Mult."))) ; Evaluate + and * where possible
+```
+
+As a general note, any 
 
 **4) Terminal Conditon Functions:**
 
