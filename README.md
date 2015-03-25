@@ -246,13 +246,69 @@ rewrite rules. Here is an example:
 (def ops (operator-ruleset '(+ "Add.") '(* "Mult."))) ; Evaluate + and * where possible
 ```
 
-Any function or operator must be evaluated in standard Clojure prefix (e.g. *(+ 2 3)*), not infix (e.g. *(2 + 3)*). If
-infix is desired then rewrite rules which go from infix to prefix can simply be incorporated.
+Any function or operator must be evaluated in standard Clojure prefix (e.g. *(+ 2 3)*), not infix (e.g. *(2 + 3)*). 
+If infix is desired then rewrite rules which go from infix to prefix can simply be incorporated.
 
-Here is a small sample which uses rewrite rules together with operators:
+Here is a small sample which uses rewrite rules together with operators (source ![here](/resources/operators-example.clj):
 
 ```clojure
+ This illustrates a small system which uses operators and user-defined
+; functions with symbolic rewriting.
+
+(use 'symbolics.core)
+(use '[clojure.pprint :only [pprint]])
+
+; Raise x to the power of n.
+(defn my-pow [x n]
+  (if (= n 0) 1 (* x (my-pow x (- n 1)))))
+
+; Define operators
+(def ops (operator-ruleset 
+           '(+ "Func. Eval.") 
+           '(* "Func. Eval.") 
+           '(my-pow "Func. Eval.")))
+
+; Define rewrite rules
+(def sym-rules (bidirectional-ruleset 
+                 '((+ :a :b) (+ :b :a) "Commutative-Add")
+                 '((* :a :b) (* :b :a) "Commutative-Mult")
+                 '((+ (* :a :c) (* :b :c)) (* (+ :a :b) :c) "Dist")))
+
+; Combine evaluative operators/functions with symbolic rules into one set
+(def rules (concat ops sym-rules))
+
+; Termination function: does the expression have at most one non-numeric value?
+(defn termination-f [exp]
+  (if (number? exp) exp
+    (<= (count (filter #(not (number? %1)) exp)) 2))) 
+
+; Make a function to reduce expression to one with at most one number
+(defn reduce-down [expression] 
+  (pprint ((build-reducer-fn rules termination-f 9) expression)))
 ```
+
+The function above reduces an expression down to one with at most 2 non-numbers.
+Below is a sample usage inside the REPL to solve two equations for specified
+variables:
+
+```clojure
+user=> (load-file "resources/operators-example.clj")
+#'user/reduce-down
+user=> (reduce-down '(+ (* 2 x) (* x 3)))
+(((+ (* 2 x) (* x 3)) start)
+ ((+ (* 2 x) (* 3 x)) "Commutative-Mult")
+ ((* (+ 2 3) x) "Dist")
+ ((* 5 x) "Func. Eval."))
+nil
+user=> (reduce-down '(+ (* 2 x) (* x (my-pow 3 2))))
+(((+ (* 2 x) (* x (my-pow 3 2))) start)
+ ((+ (* 2 x) (* (my-pow 3 2) x)) "Commutative-Mult")
+ ((* (+ 2 (my-pow 3 2)) x) "Dist")
+ ((* 11 x) "Func. Eval."))
+nil
+user=>
+```
+
 
 **4) Terminal Conditon Functions:**
 
