@@ -24,7 +24,7 @@ In this example, we use a typical set of axioms found in most discrete math text
 as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj)) is as follows:
 
 ```clojure
-use 'symbolics.core)
+(use 'symbolics.core)
 (use '[clojure.pprint :only [pprint]])
 
 ; These are the basic axioms of boolean algebra, taken from here:
@@ -56,7 +56,38 @@ use 'symbolics.core)
   (pprint ((build-prover-fn base-axioms 7) lhs rhs)))
 ```
 
-### Preliminaries and Key Components
+This code can be loaded into the REPL and can prove boolean algebra identity theorems
+interactively. We constructed a function which can produce proofs of up to 7 steps,
+and wrapped it in pretty printing. The ruleset is bi-directional, meaning that right-hand
+sides (if encountered) can also be rewritten into left-hand sides. Here is a sample usage
+inside the REPL to prove two theorems:
+
+```clojure
+user=> (load-file "resources/bool-algebra-prover.clj")
+#'user/bool-prove
+user=> (bool-prove '(A * ((! A) + B))  '(A * B))
+(((A * ((! A) + B)) start)
+ ((A * (B + (! A))) "Commutative")
+ (((A * B) + (A * (! A))) "Distributive")
+ (((A * B) + 0) "Complement")
+ ((A * B) "Identity"))
+nil
+user=> (bool-prove '(((A + B) * A) * (A + B)) 'A)
+(((((A + B) * A) * (A + B)) start)
+ (((A * (A + B)) * (A + B)) "Commutative")
+ ((A * (A + B)) "Absorption")
+ (A "Absorption"))
+nil
+user=>
+```
+
+In the example above, the bool-prove function takes in a left-hand side (LHS) and
+right-hand side (RHS) and produces a sequence of transforms based on the rule. In
+each step the rule applied to create that step from the previous one is included.
+Additionaly, each proof begin with the LHS and end with the RHS.
+
+
+### Key Components in More Depth
 
 We begin with a quick explanation of the key concepts needed to use
 this libaray.
