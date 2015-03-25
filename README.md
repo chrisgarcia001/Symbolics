@@ -191,13 +191,13 @@ keywords (e.g. :x, :y, :x) and constants are anything else. Here is two example 
 '((:a + (:b * 1)) (:a + :b) "Simplify")
 '((:a + :b) (:b + :a) "Commutative")
 ```
-In the rules above the variables are :a, :b, and :c and the constants are + and 1. 
+In the rules above the variables are *:a*, *:b*, and *:c* and the constants are *+* and *1*. 
 To illustrate how the matching and rewriting happens, consider the following expressions:
 
 ```clojure
 '(x + ((y + z) * 1) ; Expression 1
 ; Matches the simplify rule, where :a = x and :b = (y + z). 
-;Here is how it would be rewritten:
+; Here is how it would be rewritten:
 '(x + (y + z))
 
 '(x + y) ; Expression 2
@@ -208,7 +208,7 @@ To illustrate how the matching and rewriting happens, consider the following exp
 
 '((w + x) + (y + z)) ; Expression 3 
 ; Matches the commutative rule, where :a = (w + x) and :b = (y + z). 
-;Here is how it would be (directly) rewritten:
+; Here is how it would be (directly) rewritten:
 '((y + z) + (w + x)
 ```
 In Expression 3 above, we note that the two inner expressions could also be rewritten using
@@ -234,8 +234,9 @@ expression. Usage of the *unidirectional-ruleset* and *bidirectional-ruleset* fu
 above. 
 
 Sometimes we want to have a function or operator (which can compute something) to also be incorporated as something
-to be manipulated symbolically, and applied where it can be applied. For example, we would not want (2 + 3) to appear
-in a (partially) symbolic expression, we would rather it be 5.
+to be manipulated symbolically, and applied where it can be applied. For example, we would not want *(2 + 3)* to appear
+in a (partially) symbolic expression, we would rather it be *5*. However, we would want *(a + 3)*, since *a* is a symbol
+and the expression *(a + 3)* cannot be evaluated. 
 
 **4) Terminal Conditon Functions:**
 
