@@ -249,7 +249,7 @@ rewrite rules. Here is an example:
 Any function or operator must be evaluated in standard Clojure prefix (e.g. *(+ 2 3)*), not infix (e.g. *(2 + 3)*). 
 If infix is desired then rewrite rules which go from infix to prefix can simply be incorporated.
 
-Here is a small sample which uses rewrite rules together with operators (source ![here](/resources/operators-example.clj):
+Here is a small sample which uses rewrite rules together with operators (source ![here](/resources/operators-example.clj)):
 
 ```clojure
  This illustrates a small system which uses operators and user-defined
