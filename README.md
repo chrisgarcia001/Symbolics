@@ -60,10 +60,11 @@ as our rewrite rules. The code (found ![here](/resources/bool-algebra-prover.clj
 ```
 
 This code can be loaded into the REPL and can prove boolean algebra identity theorems
-interactively. Using the *build-prover-fn* function we constructed a function which can 
-produce proofs of up to 7 steps, and wrapped it in pretty printing. The ruleset is 
-bi-directional, meaning that right-hand sides (if encountered) can also be rewritten 
-into left-hand sides. Here is a sample usage inside the REPL to prove two theorems:
+interactively. Using the *build-prover-fn* function we constructed another function 
+*bool-prove* (which we then wrapped in pretty printing) which can produce proofs of 
+up to 7 steps. The ruleset is bi-directional, meaning that right-hand sides 
+(if encountered) can also be rewritten into left-hand sides. Here is a sample 
+usage inside the REPL to prove two theorems:
 
 ```clojure
 user=> (load-file "resources/bool-algebra-prover.clj")
@@ -170,6 +171,12 @@ nil
 user=>
 ```
 
+In the steps above it may appear that some steps are unnecessary (e.g. equation
+flipping). However, this is because we had rules only to deal with one equational
+layout. So to find matches the equations needed to be flipped first, and we 
+did this to keep the rulesets short. By adding rules for mirroring layots we would 
+have gotten shorter sequences of steps.
+
 #### Key Components in More Depth
 
 We provide a quick explanation of the key concepts needed to use
@@ -199,7 +206,7 @@ To illustrate how the matching and rewriting happens, consider the following exp
 '(y + x)
 
 
-'((w + x) + (y + z)) Expression 3 
+'((w + x) + (y + z)) ; Expression 3 
 ; Matches the commutative rule, where :a = (w + x) and :b = (y + z). 
 ;Here is how it would be (directly) rewritten:
 '((y + z) + (w + x)
@@ -218,9 +225,17 @@ the term rewriter will actually produce the following rewrites for Expression 3:
 ````
 
 **2) Rulesets:** A ruleset is simply a list of rules. Accordingly, two or more sets of rules can be merged 
-into a single set with *concat*.
+into a single set with the *concat* function.
 
-**3) Ruleset Builders:**
+**3) Ruleset Builders:** There are three basic functions for building rulesets: *unidirectional-ruleset*, 
+*bidirectional-ruleset*, and *operator-ruleset*. The *unidirectional-ruleset* matches only the left hand expression
+and rewrites as the right. The *bidirectional-ruleset* function will match either side and rewrite as the opposite 
+expression. Usage of the *unidirectional-ruleset* and *bidirectional-ruleset* functions is illustrated in the examples 
+above. 
+
+Sometimes we want to have a function or operator (which can compute something) to also be incorporated as something
+to be manipulated symbolically, and applied where it can be applied. For example, we would not want (2 + 3) to appear
+in a (partially) symbolic expression, we would rather it be 5.
 
 **4) Terminal Conditon Functions:**
 
