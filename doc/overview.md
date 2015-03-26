@@ -188,10 +188,16 @@ It is recommended to up your JVM memory allocation when using this library. If y
 Leiningen, you can add do this easily by adding the following (or similar) to your project.clj:
 
 ```clojure
-:jvm-opts ["-Xmx5g"] ; allocate 5 GB to JVM
+:jvm-opts ["-Xmx3g"] ; allocate 3 GB to JVM
 ```
 
-As a final note, theorem proving is in general very computationally intensive. It
-may take 15-30 seconds (or more) in some cases for proofs to be constructed. When constructing
-systems, try to take an incremental approach. Add a few rules at a time and experimentally build it up. 
+Theorem proving is in general very computationally intensive. It may take 15-30 
+seconds (or more) in some cases for proofs to be constructed. Increasing memory will
+speed the process. 
+
+As a final note, when constructing these types of systems it can be difficult to know at the start
+which rules should be used. In many systems there are known axioms, but these are often 
+insufficent for achieving proofs or other symbolic manipulations. Often other
+rules are needed (such as a rule that x * 1 = x). So try to take an incremental 
+approach. Add a few rules at a time and experimentally build up your system. 
 
