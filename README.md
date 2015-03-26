@@ -181,3 +181,7 @@ have gotten shorter sequences of steps.
 
 A more systematic overview and a description of the full
 range of capabilities can be found in the documentation ![here](/doc/overview.md).
+
+### License
+
+This project is licensed under the Eclipse Public License. Contributions welcome!
