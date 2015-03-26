@@ -23,7 +23,6 @@
 ;-------- SAMPLE REPL USAGE---------------------------
 ;> (load-file "resources/small-bool-prover.clj")
 ;> (small-bool-prove '(a * a) 'a)
-;> (small-bool-prove '(a + a) 'a)
 ;> (small-bool-prove '(a + (a * b)) 'a)
 ;> (small-bool-prove '(a * (a + b)) 'a)
 
