@@ -185,7 +185,7 @@ based on characteristics specific to certain axiom or rule systems.
 The underlying algorithm uses dynamic programming to avoid resolving 
 sub-problems. It uses memory to speed up the processing, and it consumes a lot of memory.
 It is recommended to up your JVM memory allocation when using this library. If you are using
-Leiningen, you can add do this easily by adding the following (or similar) to your project.clj:
+Leiningen, you can do this easily by adding the following (or similar) to your project.clj:
 
 ```clojure
 :jvm-opts ["-Xmx3g"] ; allocate 3 GB to JVM
